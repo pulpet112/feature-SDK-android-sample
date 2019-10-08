@@ -5,6 +5,7 @@ import android.content.Context
 import com.simplefeature.dialog.DialogBuilder
 import com.simplefeature.log.LogLevel
 import com.simplefeature.log.SdkLogger
+import com.simplefeature.data.network.ApiBuilder
 
 open class SimpleFeatureSdk {
 
@@ -17,6 +18,8 @@ open class SimpleFeatureSdk {
   }
 
   lateinit var sdkConfiguration: SdkConfiguration
+
+  private lateinit var simpleFeatureSdkService: SimpleFeatureSdkService
 
   class BuilderContext internal constructor() {
     fun with(appContext: Application): BuilderLanguage {
@@ -86,10 +89,18 @@ open class SimpleFeatureSdk {
         logLevel)
 
       SdkLogger.setLogLevel(logLevel)
+
+      simpleFeatureSdk.initService()
+
       instance = simpleFeatureSdk
 
       return simpleFeatureSdk
     }
+  }
+
+  private fun initService() {
+    val apiBuilder = ApiBuilder(sdkConfiguration.networkConfigurator)
+    simpleFeatureSdkService = SimpleFeatureSdkService(apiBuilder)
   }
 
 }
