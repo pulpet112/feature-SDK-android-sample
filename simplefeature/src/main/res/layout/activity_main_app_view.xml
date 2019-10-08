@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <com.simplefeature.ui.MainAppUiComponentView
+        android:id="@+id/mainAppView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+    />
+
+    <TextView
+        android:id="@+id/infoTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/sdk_layout_info" />
+
+    <ImageView
+        android:id="@+id/starImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:src="@android:drawable/star_big_on" />
+
+</LinearLayout>

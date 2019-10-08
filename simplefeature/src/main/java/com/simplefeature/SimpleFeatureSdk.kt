@@ -2,13 +2,14 @@ package com.simplefeature
 
 import android.app.Application
 import android.content.Context
+import android.view.View
 import androidx.fragment.app.FragmentActivity
-import com.simplefeature.dialog.DialogBuilder
-import com.simplefeature.log.LogLevel
-import com.simplefeature.log.SdkLogger
 import com.simplefeature.data.network.ApiBuilder
+import com.simplefeature.dialog.DialogBuilder
 import com.simplefeature.dialog.DialogDisplayer
 import com.simplefeature.dialog.ProgressSwitcher
+import com.simplefeature.log.LogLevel
+import com.simplefeature.log.SdkLogger
 
 open class SimpleFeatureSdk {
 
@@ -68,8 +69,8 @@ open class SimpleFeatureSdk {
     private val networkConfigurator: NetworkConfigurator,
     private val languageContextProvider: Context.() -> Context
   ) {
-    fun dialogBuilder(dialogBuilder: () -> DialogBuilder): Builder {
-      return Builder(
+    fun dialogBuilder(dialogBuilder: () -> DialogBuilder): BuilderUiComponent {
+      return BuilderUiComponent(
         appContext,
         language,
         networkConfigurator,
@@ -79,12 +80,31 @@ open class SimpleFeatureSdk {
     }
   }
 
-  class Builder internal constructor(
+  class BuilderUiComponent internal constructor(
     private val appContext: Application,
     private val language: String,
     private val networkConfigurator: NetworkConfigurator,
     private val languageContextProvider: Context.() -> Context,
     private val dialogBuilder: () -> DialogBuilder
+  ) {
+    fun uiComponentProvider(provider: (Context) -> View): Builder {
+      return Builder(
+        appContext,
+        language,
+        networkConfigurator,
+        languageContextProvider,
+        dialogBuilder,
+        provider)
+    }
+  }
+
+  class Builder internal constructor(
+    private val appContext: Application,
+    private val language: String,
+    private val networkConfigurator: NetworkConfigurator,
+    private val languageContextProvider: Context.() -> Context,
+    private val dialogBuilder: () -> DialogBuilder,
+    private val provider: (Context) -> View
   ) {
     private var logLevel: LogLevel = LogLevel.NONE
 
@@ -101,6 +121,7 @@ open class SimpleFeatureSdk {
         networkConfigurator,
         languageContextProvider,
         dialogBuilder,
+        provider,
         logLevel
       )
 

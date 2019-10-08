@@ -3,6 +3,7 @@ package com.featuresdk
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
+import android.view.View
 import androidx.appcompat.view.ContextThemeWrapper
 import com.featuresdk.dialog.DialogBuilderImpl
 import com.featuresdk.sdkconfig.NetworkConfiguratorImpl
@@ -24,6 +25,7 @@ class FeatureSdkApplication : Application() {
       .networkConfig(NetworkConfiguratorImpl())
       .languageContextProvider { handleContextChange(this) }
       .dialogBuilder { DialogBuilderImpl() }
+      .uiComponentProvider { getProductProvider(it) }
       .logLevel(LogLevel.DEBUG)
       .build()
 
@@ -36,5 +38,9 @@ class FeatureSdkApplication : Application() {
     configuration.setLocale(Locale("pl"))
     wrapper.applyOverrideConfiguration(configuration)
     return wrapper
+  }
+
+  private fun getProductProvider(context: Context): View {
+    return SimpleView(context)
   }
 }
