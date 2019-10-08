@@ -6,6 +6,8 @@ import com.simplefeature.log.SdkLogger
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 internal class ApiBuilder(private val networkConfig: NetworkConfigurator) {
@@ -25,6 +27,8 @@ internal class ApiBuilder(private val networkConfig: NetworkConfigurator) {
 
         val retrofit = Retrofit.Builder()
             .baseUrl(networkConfig.getBaseUrl())
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpBuilder.build())
             .build()
 

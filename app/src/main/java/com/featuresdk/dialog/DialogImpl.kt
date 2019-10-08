@@ -31,6 +31,11 @@ class DialogBuilderImpl : DialogBuilder {
   }
 
   override fun build(): DialogFragment {
-    return MainAppDialogFragment.newInstance(title, message)
+    return MainAppDialogFragment.newInstance(
+      title,
+      message,
+      positiveButtonText,
+      negativeButtonText
+    )
   }
 }

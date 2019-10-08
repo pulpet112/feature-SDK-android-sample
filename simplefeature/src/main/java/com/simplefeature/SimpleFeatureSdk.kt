@@ -2,10 +2,13 @@ package com.simplefeature
 
 import android.app.Application
 import android.content.Context
+import androidx.fragment.app.FragmentActivity
 import com.simplefeature.dialog.DialogBuilder
 import com.simplefeature.log.LogLevel
 import com.simplefeature.log.SdkLogger
 import com.simplefeature.data.network.ApiBuilder
+import com.simplefeature.dialog.DialogDisplayer
+import com.simplefeature.dialog.ProgressSwitcher
 
 open class SimpleFeatureSdk {
 
@@ -50,7 +53,12 @@ open class SimpleFeatureSdk {
     private val networkConfigurator: NetworkConfigurator
   ) {
     fun languageContextProvider(languageContextProvider: Context.() -> Context): BuilderDialogBuilderProvider {
-      return BuilderDialogBuilderProvider(appContext, language, networkConfigurator, languageContextProvider)
+      return BuilderDialogBuilderProvider(
+        appContext,
+        language,
+        networkConfigurator,
+        languageContextProvider
+      )
     }
   }
 
@@ -61,7 +69,13 @@ open class SimpleFeatureSdk {
     private val languageContextProvider: Context.() -> Context
   ) {
     fun dialogBuilder(dialogBuilder: () -> DialogBuilder): Builder {
-      return Builder(appContext, language, networkConfigurator, languageContextProvider, dialogBuilder)
+      return Builder(
+        appContext,
+        language,
+        networkConfigurator,
+        languageContextProvider,
+        dialogBuilder
+      )
     }
   }
 
@@ -78,6 +92,7 @@ open class SimpleFeatureSdk {
       this.logLevel = logLevel
       return this
     }
+
     fun build(): SimpleFeatureSdk {
       val simpleFeatureSdk = SimpleFeatureSdk()
       simpleFeatureSdk.sdkConfiguration = SdkConfiguration(
@@ -86,13 +101,14 @@ open class SimpleFeatureSdk {
         networkConfigurator,
         languageContextProvider,
         dialogBuilder,
-        logLevel)
+        logLevel
+      )
 
       SdkLogger.setLogLevel(logLevel)
 
-      simpleFeatureSdk.initService()
-
       instance = simpleFeatureSdk
+
+      simpleFeatureSdk.initService()
 
       return simpleFeatureSdk
     }
@@ -101,6 +117,18 @@ open class SimpleFeatureSdk {
   private fun initService() {
     val apiBuilder = ApiBuilder(sdkConfiguration.networkConfigurator)
     simpleFeatureSdkService = SimpleFeatureSdkService(apiBuilder)
+  }
+
+  fun showSample(
+    fragmentActivity: FragmentActivity,
+    progressSwitcher: ProgressSwitcher,
+    dialogDisplayer: DialogDisplayer
+  ) {
+    return simpleFeatureSdkService.showSample(
+      fragmentActivity,
+      progressSwitcher,
+      dialogDisplayer
+    )
   }
 
 }
