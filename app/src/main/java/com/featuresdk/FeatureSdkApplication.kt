@@ -25,7 +25,7 @@ class FeatureSdkApplication : Application() {
       .networkConfig(NetworkConfiguratorImpl())
       .languageContextProvider { handleContextChange(this) }
       .dialogBuilder { DialogBuilderImpl() }
-      .uiComponentProvider { getProductProvider(it) }
+      .uiComponentProvider { getUiComponentProvider(it) }
       .logLevel(LogLevel.DEBUG)
       .build()
 
@@ -40,7 +40,7 @@ class FeatureSdkApplication : Application() {
     return wrapper
   }
 
-  private fun getProductProvider(context: Context): View {
+  private fun getUiComponentProvider(context: Context): View {
     return SimpleView(context)
   }
 }
