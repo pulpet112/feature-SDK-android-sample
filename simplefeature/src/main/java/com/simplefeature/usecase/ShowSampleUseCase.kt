@@ -1,5 +1,6 @@
 package com.simplefeature.usecase
 
+import android.widget.Toast
 import com.simplefeature.data.SimpleFeatureRepository
 import com.simplefeature.dialog.DialogBuilder
 import com.simplefeature.dialog.DialogDisplayer
@@ -36,7 +37,9 @@ internal class ShowSampleUseCase(
           .build()
 
         dialogDisplayer.show(SUCCESS_DIALOG_TAG, fragment)
-        dialogDisplayer.registerForPositiveButton(SUCCESS_DIALOG_TAG) { fragment.dismiss() }
+        dialogDisplayer.registerForPositiveButton(SUCCESS_DIALOG_TAG) {
+          Toast.makeText(fragment.requireContext(), "Positive button clicked", Toast.LENGTH_LONG).show()
+        }
         dialogDisplayer.registerForNegativeButton(ERROR_DIALOG_TAG) { fragment.dismiss() }
       }, {
         val fragment = dialogBuilder.invoke()
