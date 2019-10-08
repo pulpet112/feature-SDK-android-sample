@@ -131,4 +131,7 @@ open class SimpleFeatureSdk {
     )
   }
 
+  fun openInternalScreen(fragmentActivity: FragmentActivity) {
+    simpleFeatureSdkService.openInternalScreen(fragmentActivity)
+  }
 }

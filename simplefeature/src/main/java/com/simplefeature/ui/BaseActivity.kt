@@ -1,4 +1,4 @@
-package com.featuresdk
+package com.simplefeature.ui
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

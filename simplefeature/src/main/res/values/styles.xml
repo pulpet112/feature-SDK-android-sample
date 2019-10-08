@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="companyNameButtonStyle" format="reference" />
+    <attr name="companyNameFontFamily" format="reference" />
+    <attr name="companyNameTextColor" format="reference|color" />
+    <attr name="companyNameDrawableIcon" format="reference" />
+
+    <style name="CompanyNameTheme" parent="CompanyNameDefaultTheme" />
+
+    <style name="CompanyNameDefaultTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="ButtonStyle" parent="CompanyNameTheme">
+        <item name="android:fontFamily">?companyNameFontFamily</item>
+    </style>
+
+</resources>

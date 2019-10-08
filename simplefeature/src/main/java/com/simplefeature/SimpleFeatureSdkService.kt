@@ -11,12 +11,14 @@ import com.simplefeature.dialog.DialogBuilder
 import com.simplefeature.dialog.DialogDisplayer
 import com.simplefeature.dialog.ProgressSwitcher
 import com.simplefeature.schedulers.AndroidRxSchedulers
+import com.simplefeature.usecase.OpenInternalScreenUseCase
 import com.simplefeature.usecase.ShowSampleUseCase
 import io.reactivex.disposables.Disposable
 
 internal class SimpleFeatureSdkService(apiBuilder: ApiBuilder) {
 
   private val showSampleUseCase: ShowSampleUseCase
+  private val openInternalScreenUseCase: OpenInternalScreenUseCase
 
   private val dialogBuilder: () -> DialogBuilder
 
@@ -28,6 +30,7 @@ internal class SimpleFeatureSdkService(apiBuilder: ApiBuilder) {
     dialogBuilder = SimpleFeatureSdk.instance.sdkConfiguration.dialogBuilder
 
     showSampleUseCase = ShowSampleUseCase(repository, schedulers)
+    openInternalScreenUseCase = OpenInternalScreenUseCase()
   }
 
   fun showSample(
@@ -51,4 +54,7 @@ internal class SimpleFeatureSdkService(apiBuilder: ApiBuilder) {
     )
   }
 
+  fun openInternalScreen(fragmentActivity: FragmentActivity) {
+    openInternalScreenUseCase.execute(fragmentActivity)
+  }
 }

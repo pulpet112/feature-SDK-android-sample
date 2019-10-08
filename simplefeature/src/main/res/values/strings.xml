@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SimpleFeature</string>
+    <string name="textview_with_no_style">TextView with no style</string>
+    <string name="textview_style_with_font_taken_from_the_main_app">TextView style with font taken from the main app</string>
+    <string name="button_with_style_from_the_main_app">Button with style from the main app</string>
+    <string name="button_with_no_style">Button with no style but text color from the main app</string>
 </resources>

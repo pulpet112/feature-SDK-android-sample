@@ -8,6 +8,7 @@
 
     <Button
         android:id="@+id/executeButton"
+        style="@style/FormButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/execute_sdk_action"
@@ -15,6 +16,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/openInternalScreenButton"
+        style="@style/FormButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/open_internal_screen"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/executeButton" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -24,6 +36,6 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/executeButton" />
+        app:layout_constraintTop_toBottomOf="@id/openInternalScreenButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

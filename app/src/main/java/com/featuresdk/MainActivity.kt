@@ -2,6 +2,7 @@ package com.featuresdk
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.featuresdk.dialog.MainAppDialogFragment
 import com.simplefeature.SimpleFeatureSdk
@@ -10,18 +11,26 @@ import com.simplefeature.dialog.ProgressSwitcher
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
+    setListeners()
+  }
+
+  private fun setListeners() {
     executeButton.setOnClickListener {
       SimpleFeatureSdk.instance.showSample(
         this,
         getProgressSwitcher(),
         getDialogDisplayer()
       )
+    }
+
+    openInternalScreenButton.setOnClickListener {
+      SimpleFeatureSdk.instance.openInternalScreen(this)
     }
   }
 

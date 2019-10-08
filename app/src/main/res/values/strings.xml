@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FeatureSDK</string>
     <string name="execute_sdk_action">Execute Sdk Action</string>
+    <string name="open_internal_screen">Open internal screen</string>
 </resources>
