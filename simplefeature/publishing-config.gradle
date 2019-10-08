@@ -1,0 +1,51 @@
+apply plugin: 'digital.wup.android-maven-publish'
+
+group = 'com.companyname'
+
+ext {
+  artifactId = 'simple-feature-sdk-android'
+
+  pubName = 'SimpleFeature SDK'
+  pubDescription = 'Sample SDK'
+
+  licenseName = 'Copyright (c) 2019 CompanyName'
+  licenseUrl = ''
+  allLicenses = [""]
+}
+
+def pomConfig = {
+  licenses {
+    license {
+      name licenseName
+      url licenseUrl
+    }
+  }
+}
+
+publishing {
+  publications {
+    mavenAar(MavenPublication) {
+      from components.android
+      groupId project.group
+      artifactId project.artifactId
+      version project.simple_feature_sdk_version
+      pom.withXml {
+        def root = asNode()
+        root.appendNode('name', project.pubName)
+        root.appendNode('description', project.pubDescription)
+        root.children().last() + pomConfig
+      }
+    }
+  }
+
+  repositories {
+    maven {
+      name "RepositoryName"
+      credentials {
+        username "$project.repoUsername"
+        password "$project.repoPassword"
+      }
+      url "$project.repoUrl"
+    }
+  }
+}
